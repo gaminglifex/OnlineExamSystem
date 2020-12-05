@@ -24,6 +24,10 @@
         
     </head>
     <body id="body">
+
+        <!-- Authentication Script -->
+        <?php include('Authentication\loginAuth.php'); ?>
+
         <div id="auth-form" class="container">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
@@ -38,20 +42,21 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="nav-login">
                     <div class="login-form">
-                        <form class="form" id="login-form">
+                        <form class="form" id="login-form" action="" method="post">
                             <div class="form-col">
                                 <div class="form-group col-md">
                                     <div class="form-group">
                                         <label for="inputLoginEmail">Email</label>
-                                        <input type="email" id="inputLgoinEmail" name="loginEmail" class="form-control"
-                                            placeholder="JohnDoe@domain.com">
+                                        <input type="email" id="inputLoginEmail" name="inputLoginEmail" class="form-control"
+                                            placeholder="JohnDoe@domain.com" required>
                                     </div>
+                                    <?php echo "$emailErr"; ?>
                                 </div>
                                 <div class="form-group col-md">
                                     <div class="form-group">
                                         <label for="inputLoginPassword">Password</label>
-                                        <input type="password" id="inputLoginPassword" name="loginPassword" class="form-control"
-                                            placeholder="Password">
+                                        <input type="password" id="inputLoginPassword" name="inputLoginPassword" class="form-control"
+                                            placeholder="Password" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md">
@@ -61,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="buttonHolder">
-                                    <button type="submit" class="btn btn-primary btn-md">Login</button>
+                                    <button type="submit" name="submit" class="btn btn-primary btn-md">Login</button>
                                 </div>
                             </div>
                         </form>
