@@ -86,11 +86,16 @@
                                 <div class="form-col col-md-8">
                                     <div class="form-group col-md">
                                         <div class="form-group">
-                                            <label for="inputUsername">Username</label>
-                                            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="JohnDoe">
+                                            <label for="inputLoginID">LoginID</label>
+                                            <input type="text" id="inputLoginID" name="loginID" class="form-control" placeholder="12345678D">
                                         </div>
                                     </div>
-                                
+                                    <div class="form-group col-md">
+                                        <div class="form-group">
+                                            <label for="inputNickname">Nickname</label>
+                                            <input type="text" id="inputNickname" name="nickname" class="form-control" placeholder="JohnDoe">
+                                        </div>
+                                    </div>
                                     <div class="form-group col-md">
                                         <div class="form-group">
                                             <label for="inputRegisterEmail">Email</label>
@@ -112,12 +117,39 @@
                                         </div>
                                         <div class="collapse" id="studentOpt" data-parent="#collapseOpt">
                                             <div class="card card-body">
-                                                JJ
+                                                <div class="form-group row justify-content-around">
+                                                    <label class="col-form-label" for="Gender">Gender</label>
+                                                    <div class="col-sm-3">
+                                                        <select id="Gender" class="form-control">
+                                                            <option value="M">Male</option>
+                                                            <option value="F">Female</option>
+                                                        </select>
+                                                    </div>
+                                                    <label class="col-form-label" for="inputDay">Birthday</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputDay" placeholder="dd">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroupPrepend1">/</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="inputMonth" placeholder="mm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroupPrepend2">/</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="inputYear" placeholder="yyy">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="collapse" id="staffOpt" data-parent="#collapseOpt">
                                             <div class="card card-body">
-                                                KK
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label" for=CourseInfo>Course</label>
+                                                    <div class="col-sm-10">
+                                                        <input id="CourseInfo" class="form-control" type="text">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
