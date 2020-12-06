@@ -26,8 +26,12 @@
     <body id="body">
 
         <!-- Authentication Script -->
+<<<<<<< HEAD
         <?php include("Authentication\loginAuth.php"); ?>
         <?php include('Authentication\registerAuth.php'); ?>
+=======
+        <?php include('Authentication\loginAuth.php'); ?>
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
 
         <div id="auth-form" class="container">
             <ul class="nav nav-pills nav-fill">
@@ -59,7 +63,10 @@
                                         <input type="password" id="inputLoginPassword" name="inputLoginPassword" class="form-control"
                                             placeholder="Password" required>
                                     </div>
+<<<<<<< HEAD
                                     <?php echo "$passwordErr"; ?>
+=======
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                 </div>
                                 <div class="form-group col-md">
                                     <div class="form-group clearfix">
@@ -68,7 +75,11 @@
                                     </div>
                                 </div>
                                 <div class="buttonHolder">
+<<<<<<< HEAD
                                     <button type="submit" name="login" class="btn btn-primary btn-md">Login</button>
+=======
+                                    <button type="submit" name="submit" class="btn btn-primary btn-md">Login</button>
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                 </div>
                             </div>
                         </form>
@@ -76,6 +87,7 @@
                 </div>
                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="nav-register">
                     <div class="register-form">
+<<<<<<< HEAD
                         <form class="form" action="Authentication\registerAuth.php" method="post" id="register-form" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-col col-md-4">
@@ -91,6 +103,20 @@
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                             The image format must be <strong>JPEG</strong> only
                                         </small>
+=======
+                        <form class="form" id="register-form">
+                            <div class="form-row">
+                                <div class="form-col col-md-4">
+                                    <div class="form-file">
+                                        <input type="file" class="inputfile" name="your_picture" id="your_picture" onchange="readURL(this);"
+                                            data-multiple-caption="{count} files selected" multiple />
+                                        <label for="your_picture">
+                                            <figure>
+                                                <img src="images/your-picture.png" alt="" class="your_picture_image">
+                                            </figure>
+                                            <span class="file-button">choose picture</span>
+                                        </label>
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                     </div>
                                 </div>
                                 <div class="form-col col-md-8">
@@ -98,56 +124,80 @@
                                         <div class="form-group">
                                             <label for="inputLoginID">LoginID</label>
                                             <input type="text" id="inputLoginID" name="loginID" class="form-control" placeholder="12345678D">
+<<<<<<< HEAD
                                             <small id="passwordHelpBlock" class="form-text text-muted">
                                                 Please make sure the ID is consistent with the assigned one.
                                             </small>
                                             <?php echo "$loginIdErr"; ?>
+=======
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                         </div>
                                     </div>
                                     <div class="form-group col-md">
                                         <div class="form-group">
                                             <label for="inputNickname">Nickname</label>
                                             <input type="text" id="inputNickname" name="nickname" class="form-control" placeholder="JohnDoe">
+<<<<<<< HEAD
                                             <small id="passwordHelpBlock" class="form-text text-muted">
                                                 No special characters are allowed!
                                             </small>
                                             <?php echo "$usernameErr"; ?>
+=======
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                         </div>
                                     </div>
                                     <div class="form-group col-md">
                                         <div class="form-group">
                                             <label for="inputRegisterEmail">Email</label>
                                             <input type="email" id="inputRegisterEmail" name="registerEmail" class="form-control" placeholder="JohnDoe@domain.com">
+<<<<<<< HEAD
                                             <small id="passwordHelpBlock" class="form-text text-muted">
                                                 Dont' leave it empty.
                                             </small>
                                             <?php echo "$emailRegErr"; ?>
+=======
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                         </div>
                                     </div>
                                     <div class="form-group col-md">
                                         <label for="inputRegisterPassword">Password</label>
                                         <input type="password" id="inputRegisterPassword" name="registerPassword" class="form-control" placeholder="Password">
+<<<<<<< HEAD
                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                             Your password must be 8-20 characters long, contain letters,
                                                 numbers and special characters, but must not contain spaces.
                                         </small>
                                         <?php echo "$passwordRegErr"; ?>
+=======
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                     </div>
                                     <div class="form-group col-md" id="collapseOpt">
                                         <div class="btn-group-toggle clearfix" data-toggle="buttons">
                                             <label id="stuBtn" class="float-left btn btn-primary btn-md active custBtn">
+<<<<<<< HEAD
                                                 <input id="stuOpt" name="identity" value="student" type="radio" data-toggle="collapse" data-target="#studentOpt" aria-expanded="false" aria-controls="studentOpt" checked> I am a student
+=======
+                                                <input id="stuOpt" name="identity" value="student" type="radio" data-toggle="collapse" data-target="#studentOpt" aria-expanded="false" aria-controls="studentOpt"> I am a student
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                             </label>
                                             <label id="staffBtn" class="float-right btn btn-primary btn-md custBtn">
                                                 <input id="staffOpt" name="identity" value="staff" type="radio" data-toggle="collapse" data-target="#staffOpt" aria-expanded="false" aria-controls="staffOpt"> I am a staff
                                             </label>
                                         </div>
+<<<<<<< HEAD
                                         <div class="collapse show" id="studentOpt" data-parent="#collapseOpt">
+=======
+                                        <div class="collapse" id="studentOpt" data-parent="#collapseOpt">
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                             <div class="card card-body">
                                                 <div class="form-group row justify-content-around">
                                                     <label class="col-form-label" for="Gender">Gender</label>
                                                     <div class="col-sm-3">
+<<<<<<< HEAD
                                                         <select id="Gender" name="Gender" class="form-control">
+=======
+                                                        <select id="Gender" class="form-control">
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                                             <option value="M">Male</option>
                                                             <option value="F">Female</option>
                                                         </select>
@@ -155,6 +205,7 @@
                                                     <label class="col-form-label" for="inputDay">Birthday</label>
                                                     <div class="col-sm-6">
                                                         <div class="input-group">
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="dd" id="inputDay" placeholder="dd">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="inputGroupPrepend1">/</span>
@@ -164,6 +215,17 @@
                                                                 <span class="input-group-text" id="inputGroupPrepend2">/</span>
                                                             </div>
                                                             <input type="text" class="form-control" name="yyyy" id="inputYear" placeholder="yyyy">
+=======
+                                                            <input type="text" class="form-control" id="inputDay" placeholder="dd">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroupPrepend1">/</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="inputMonth" placeholder="mm">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="inputGroupPrepend2">/</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="inputYear" placeholder="yyy">
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,17 +236,25 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label" for=CourseInfo>Course</label>
                                                     <div class="col-sm-10">
+<<<<<<< HEAD
                                                         <input id="CourseInfo" name="courseInfo" class="form-control" type="text">
                                                         <small id="passwordHelpBlock" class="form-text text-muted">
                                                             eg. EIE4432,EIE4433,EIE1234 MUst not contain any spaces.
                                                         </small>
+=======
+                                                        <input id="CourseInfo" class="form-control" type="text">
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="buttonHolder">
+<<<<<<< HEAD
                                         <button type="submit" name="register" class="btn btn-primary btn-md">Register</button>
+=======
+                                        <button type="submit" class="btn btn-primary btn-md">Register</button>
+>>>>>>> 93b25df2c9a812de6e69b66258a489e2af34e3e6
                                     </div>
                                 </div>
                             </div>
