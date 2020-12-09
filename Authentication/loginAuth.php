@@ -10,7 +10,7 @@
     }
 
     if (isset($_POST["login"])) {
-        $loginId = validateInput($_POST['inputLoginID']);
+        $loginId = validateInput(strtoupper($_POST['inputLoginID']));
         $password = validateInput($_POST['inputLoginPassword']);
         $userQuery = "SELECT userid, user_pw FROM stu_info WHERE userid = '".$loginId."'";
         $result = $connect->query($userQuery);
