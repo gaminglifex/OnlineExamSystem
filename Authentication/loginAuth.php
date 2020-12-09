@@ -4,14 +4,15 @@
     $LoginIdErr = "";
     $passwordErr = "";
     $connect = mysqli_connect($server, $user, $pw, $db);
+
     if (!$connect) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
     if (isset($_POST["login"])) {
-        $userID = validateInput(strtoupper($_POST['inputLoginID']));
+        $loginId = validateInput($_POST['inputLoginID']);
         $password = validateInput($_POST['inputLoginPassword']);
-        $userQuery = "SELECT userid, user_pw FROM stu_info WHERE userid = '".$userID."'";
+        $userQuery = "SELECT userid, user_pw FROM stu_info WHERE userid = '".$loginId."'";
         $result = $connect->query($userQuery);
         if($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
@@ -28,5 +29,4 @@
         }
         $connect->close();
     }
-    
 ?>

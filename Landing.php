@@ -28,6 +28,7 @@
         <?php include_once("Authentication\loginAuth.php"); ?>
         <?php include_once('Authentication\registerAuth.php'); ?>
 
+
         <div id="auth-form" class="container">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
@@ -59,6 +60,7 @@
                                             placeholder="Password" required>
                                     </div>
                                     <?php echo "$passwordErr"; ?>
+
                                 </div>
                                 <div class="form-group col-md">
                                     <div class="form-group clearfix">
