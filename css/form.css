@@ -1,0 +1,27 @@
+.login-form {
+  width: 550px;
+  /* position: absolute; */
+  /* top: 50%; */
+  margin: 220px auto;
+  /* transform: translate(-50%, -50%); */
+}
+
+.login-form .form {
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-form .form-control {
+  height: 40px;
+  font-size: 15px;
+}
+
+.login-form .buttonHolder {
+  text-align: center;
+}
+
+.login-form .buttonHolder .btn {
+  width: 80%;
+}

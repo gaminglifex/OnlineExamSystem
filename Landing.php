@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -19,17 +18,13 @@
         <!-- Main js & css-->
         <link rel="stylesheet" href="css/global.css">
         <script src="js/main.js"></script>
-        
     </head>
     <body id="body">
 
         <!-- Authentication Script -->
-        <?php session_start(); ?>
-        <?php include_once("Authentication\loginAuth.php"); ?>
-        <?php include_once('Authentication\registerAuth.php'); ?>
-
-
+        <?php include_once("Authentication\UserAuth.php"); ?>
         <div id="auth-form" class="container">
+            <?php echo "$registerStatus"; ?>
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
                     <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login"
@@ -64,8 +59,8 @@
                                 </div>
                                 <div class="form-group col-md">
                                     <div class="form-group clearfix">
-                                        <label class="float-left checkbox-inline"><input type="checkbox"> Remember me</label>
-                                        <a href="#" class="float-right">Forgot password?</a>
+                                        <label class="float-left checkbox-inline"><input type="checkbox" name="remember" value="rembmer"> Remember me</label>
+                                        <a href="/Exam/pages/resetPassword.php" class="float-right">Forgot password?</a>
                                     </div>
                                 </div>
                                 <div class="buttonHolder">
@@ -97,8 +92,8 @@
                                 <div class="form-col col-md-8">
                                     <div class="form-group col-md">
                                         <div class="form-group">
-                                            <label for="inputLoginID">LoginID</label>
-                                            <input type="text" id="inputLoginID" name="loginID" class="form-control" placeholder="12345678D">
+                                            <label for="registerLoginID">LoginID</label>
+                                            <input type="text" id="registerLoginID" name="loginID" class="form-control" placeholder="12345678D">
                                             <small id="passwordHelpBlock" class="form-text text-muted">
                                                 Please make sure the ID is consistent with the assigned one.
                                             </small>
