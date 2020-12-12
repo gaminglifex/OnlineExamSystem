@@ -6,12 +6,6 @@
     if (!$connect) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
-    $Query = "SHOW TABLES FROM $db";
-    $result = $connect->query($Query);
-    while ($row = $result->fetch_row()) {
-        echo "$row[0]";
-    }
 ?>
 <html>
 <head>
@@ -36,7 +30,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="staffaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -47,7 +41,7 @@
                     </button>
                 </div>
 
-                <form action="stuData.php" method="POST">
+                <form action="retrieveData.php" method="POST">
 
                     <div class="modal-body">
                         <div class="form-group">
@@ -71,20 +65,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select class="form-control" name="gender" id="gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Birthday </label>
-                            <input type="text" name="BOD" class="form-control" placeholder="dd/mm/yyyy">
+                            <label> Courses </label>
+                            <input type="text" name="courses" class="form-control" placeholder="EIE4432,EIE4434">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="insertdata" class="btn btn-primary">Save Data</button>
+                        <button type="submit" name="insertStaffdata" class="btn btn-primary">Save Data</button>
                     </div>
                 </form>
 
@@ -98,13 +85,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Student Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit Staff Data </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="stuData.php" method="POST">
+                <form action="retrieveData.php" method="POST">
 
                     <div class="modal-body">
 
@@ -132,24 +119,19 @@
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label> Gender </label>
-                            <input type="text" name="sex" id="sex" class="form-control"
+                            <label> Courses </label>
+                            <input type="text" name="course" id="course" class="form-control"
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label> Birthday </label>
-                            <input type="text" name="BOD" id="BOD" class="form-control"
-                                placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label> Profile Image </label>
+                            <label> ProfileImg </label>
                             <input type="text" name="profileImg" id="profileImg" class="form-control"
                                 placeholder="">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="submit" name="updateStaffdata" class="btn btn-primary">Update Data</button>
                     </div>
                 </form>
 
@@ -163,13 +145,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Delete Student Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Delete Staff Data </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <form action="stuData.php" method="POST">
+                <form action="retrieveData.php" method="POST">
 
                     <div class="modal-body">
 
@@ -179,7 +161,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                        <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button>
+                        <button type="submit" name="deleteStaffdata" class="btn btn-primary"> Yes !! Delete it. </button>
                     </div>
                 </form>
 
@@ -187,14 +169,14 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="jumbotron">
+    <div class="container-fluid">
+        <div class="jumbotron-fluid">
             <div class="card">
-                <h2> Student Database </h2>
+                <h2> Staff Database </h2>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staffaddmodal">
                         ADD DATA
                     </button>
                 </div>
@@ -210,7 +192,7 @@
                     die("Connection failed: " . mysqli_connect_error());
                 }
 
-                $query = "SELECT * FROM stu_info";
+                $query = "SELECT * FROM staff_info";
                 $result = $connect->query($query);
                 ?>
                     <table id="datatableid" class="table table-bordered table-dark">
@@ -220,8 +202,7 @@
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">User Password</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Birthday</th>
+                                <th scope="col">Courses</th>
                                 <th scope="col">Profile Image</th>
                                 <th scope="col"> Action </th>
                             </tr>
@@ -238,9 +219,17 @@
                                 <td> <?php echo $row['username']; ?> </td>
                                 <td> <?php echo $row['email']; ?> </td>
                                 <td> <?php echo $row['user_pw']; ?> </td>
-                                <td> <?php echo $row['sex']; ?> </td>
-                                <td> <?php echo $row['BOD']; ?> </td>
-                                <td> <?php echo $row['profileImg']; ?> </td>
+                                <td> <?php echo $row['courses']; ?> </td>
+                                <td> 
+                                <?php 
+                                    if(!empty($row['profileimg'])){
+                                        echo $row['profileimg'] . "<br>";
+                                        echo "<img id='posts-img' src='/Exam/profileimage/".$row['profileimg']."' style='width: 100px;height:100px;'>";
+                                    } else {
+                                        echo "<img id='posts-img' src='/Exam/profileimage/your-picture.png' style='width: 100px;height:100px;'>";
+                                    }
+                                ?> 
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-success editbtn"> EDIT </button>
                                     <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
@@ -263,7 +252,7 @@
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         $(document).ready(function () {
 
             $('.viewbtn').on('click', function () {
@@ -280,7 +269,7 @@
             });
 
         });
-    </script>
+    </script> -->
 
 
     <script>
@@ -342,9 +331,8 @@
                 $('#username').val(data[1]);
                 $('#email').val(data[2]);
                 $('#password').val(data[3]);
-                $('#sex').val(data[4]);
-                $('#BOD').val(data[5]);
-                $('#profileImg').val(data[6]);
+                $('#course').val(data[4]);
+                $('#profileImg').val(data[5]);
             });
         });
     </script>

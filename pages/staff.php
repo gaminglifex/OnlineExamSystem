@@ -32,9 +32,7 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Menu</div>
         <div class="list-group list-group-flush">
-            <a href="admin.php?page=stuDatabase" name="page" class="list-group-item list-group-item-action bg-light">Student Database</a>
-            <a href="admin.php?page=staffDatabase" name="page" class="list-group-item list-group-item-action bg-light">Staff Database</a>
-            <a href="admin.php?page=staffProfile" name="page" class="list-group-item list-group-item-action bg-light">Profile</a>
+            <a href="staff.php?page=staffProfile" name="page" class="list-group-item list-group-item-action bg-light">Profile</a>
             <a href="logout.php" name="page" class="list-group-item list-group-item-action bg-light">Logut</a>
         </div>
     </div>
@@ -89,7 +87,7 @@
         <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
       </div> -->
       <?php
-        $pages = isset($_GET['page']) ? $_GET['page'] : "stuDatabase"; 
+        $pages = isset($_GET['page']) ? $_GET['page'] : "staff"; 
         include_once($pages.".php");
       ?>
     </div>
