@@ -51,8 +51,8 @@ if($result->num_rows > 0) {
                             <?php echo "<input type='text' name='password'  value='".$rows['user_pw']."' class='form-control' placeholder='12345678D'>" ?>
                           </div>
                           <div class="form-group">
-                            <label for="course">Course</label>
-                            <input type="text" name="course" class="form-control">
+                            <label for="course">Courses</label>
+                            <?php echo "<input type='text' name='course'  value='".$rows['courses']."' class='form-control' placeholder='12345678D'>" ?>
                           </div>
                           <div class="form-group">
                             <div class="form-group">

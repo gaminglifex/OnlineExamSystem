@@ -43,8 +43,8 @@
             while($rows = $result->fetch_assoc()){
                 if($rows['user_pw'] == $password){
                     if(!empty($_POST['remember'])){
-                        setcookie('loginID', "$loginId", time()+60*60*7); // Cookies Valid for 7 days
-                        setcookie('password', "$password", time()+60*60*7); // Cookies Valid for 7 hrs
+                        setcookie('loginID', $loginId, time()+86400); // Cookies Valid for 1 days
+                        setcookie('password', $password, time()+86400); // Cookies Valid for 1 hrs
                     } else {
                         if(isset($_COOKIE['loginID']) || isset($_COOKIE['password'])){
                             setcookie('loginID', "");
@@ -64,8 +64,8 @@
             while($rows = $result2->fetch_assoc()){
                 if($rows['user_pw'] == $password){
                     if(!empty($_POST['remember'])){
-                        setcookie('loginID', "$loginId", time()+60*60*7); // Cookies Valid for 7 days
-                        setcookie('password', "$password", time()+60*60*7); // Cookies Valid for 7 hrs
+                        setcookie('loginID', $loginId, time()+86400); // Cookies Valid for 1 days
+                        setcookie('password', $password, time()+86400); // Cookies Valid for 1 hrs
                     } else {
                         if(isset($_COOKIE['loginID']) || isset($_COOKIE['password'])){
                             setcookie('loginID', "");
@@ -241,7 +241,7 @@
         $password = validateInput($_POST['inputPassword']);
         $rePassword = validateInput($_POST['inputRePassword']);
         $userQuery = "SELECT userid, email FROM stu_info WHERE userid = '".$loginId."'";
-        $userQuery2 = "SELECT userid, user_pw FROM staff_info WHERE userid = '".$loginId."'";
+        $userQuery2 = "SELECT userid, email FROM staff_info WHERE userid = '".$loginId."'";
         $insertQuery = "UPDATE stu_info SET user_pw = '".$password."' WHERE userid = '".$loginId."'";
         $insertQuery2 = "UPDATE staff_info SET user_pw = '".$password."' WHERE userid = '".$loginId."'";
         $result = $connect->query($userQuery);
