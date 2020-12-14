@@ -195,7 +195,7 @@
                 $query = "SELECT * FROM staff_info";
                 $result = $connect->query($query);
                 ?>
-                    <table id="datatableid" class="table table-bordered table-dark">
+                    <table id="staffdata" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Login ID</th>
@@ -215,25 +215,20 @@
             ?>
                         <tbody>
                             <tr>
-                                <td> <?php echo $row['userid']; ?> </td>
-                                <td> <?php echo $row['username']; ?> </td>
-                                <td> <?php echo $row['email']; ?> </td>
-                                <td> <?php echo $row['user_pw']; ?> </td>
-                                <td> <?php echo $row['courses']; ?> </td>
-                                <td> 
-                                <?php 
+                                <td><?php echo $row['userid']; ?></td>
+                                <td><?php echo $row['username']; ?></td>
+                                <td><?php echo $row['email']; ?></td>
+                                <td><?php echo $row['user_pw']; ?></td>
+                                <td><?php echo $row['courses']; ?></td>
+                                <td><?php 
                                     if(!empty($row['profileimg'])){
                                         echo $row['profileimg'] . "<br>";
                                         echo "<img id='posts-img' src='/Exam/profileimage/".$row['profileimg']."' style='width: 100px;height:100px;'>";
                                     } else {
                                         echo "<img id='posts-img' src='/Exam/profileimage/your-picture.png' style='width: 100px;height:100px;'>";
                                     }
-                                ?> 
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
-                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
-                                </td>
+                                    ?></td>
+                                <td><button type="button" class="btn btn-success editbtn"> EDIT </button><button type="button" class="btn btn-danger deletebtn"> DELETE </button></td>
                             </tr>
                         </tbody>
                         <?php           
@@ -275,16 +270,17 @@
     <script>
         $(document).ready(function () {
 
-            $('#datatableid').DataTable({
+            $('#staffdata').DataTable({
                 "pagingType": "full_numbers",
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
+                "info": false,
                 responsive: true,
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "Search Your Data",
+                    searchPlaceholder: "Search.....",
                 }
             });
 

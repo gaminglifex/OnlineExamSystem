@@ -30,12 +30,12 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="examaddmodal" tabindex="-1" role="dialog" aria-labelledby="addExam"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Data</h5>
+                    <h5 class="modal-title" id="addExam">Add Exam</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -45,40 +45,42 @@
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label> Login ID </label>
-                            <input type="text" name="loginID" class="form-control" placeholder="12345678D">
+                            <label> Exam Title </label>
+                            <input type="text" name="examTitle" id="examTitle" class="form-control"
+                                placeholder="">
                         </div>
 
                         <div class="form-group">
-                            <label> Username </label>
-                            <input type="text" name="username" class="form-control" placeholder="John Doe">
+                            <label> Addition Mark</label>
+                            <input type="text" name="addMark" id="addMark" class="form-control"
+                                placeholder="Addition mark for each correct answer">
                         </div>
 
                         <div class="form-group">
-                            <label> Email </label>
-                            <input type="text" name="email" class="form-control" placeholder="JohnDoe@gmail.com">
+                            <label> Deduction Mark </label>
+                            <input type="text" name="deductMark" id="deductMark" class="form-control"
+                                placeholder="Deduction Mark for each incorrect answer">
                         </div>
 
                         <div class="form-group">
-                            <label> Password </label>
-                            <input type="text" name="password" class="form-control" placeholder="">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select class="form-control" name="gender" id="gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            </select>
+                            <label> No. of Questions </label>
+                            <input type="text" name="noOfQuestion" id="noOfQuestion" class="form-control"
+                                placeholder="">
                         </div>
                         <div class="form-group">
-                            <label> Birthday </label>
-                            <input type="text" name="BOD" class="form-control" placeholder="dd/mm/yyyy">
+                            <label> Scheduled time</label>
+                            <input type="text" name="scheduledTime" id="scheduledTime" class="form-control"
+                                placeholder="dd/mm/yyyy hh:mm">
+                        </div>
+                        <div class="form-group">
+                            <label> Duration(Minutes) </label>
+                            <input type="text" name="examDuration" id="examDuration" class="form-control"
+                                placeholder="">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="insertStudata" class="btn btn-primary">Save Data</button>
+                        <button type="submit" name="insertExamdata" class="btn btn-primary">Save Data</button>
                     </div>
                 </form>
 
@@ -92,7 +94,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Student Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit Staff Data </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -101,49 +103,48 @@
                 <form action="retrieveData.php" method="POST">
 
                     <div class="modal-body">
-
                         <div class="form-group">
-                            <label> Login ID </label>
-                            <input type="text" name="loginID" id="loginID" class="form-control"
+                            <label> Exam Title </label>
+                            <input type="text" name="examTitle" id="MexamTitle" class="form-control"
                                 placeholder="">
                         </div>
 
                         <div class="form-group">
-                            <label> Username </label>
-                            <input type="text" name="username" id="username" class="form-control"
-                                placeholder="">
+                            <label> Addition Mark</label>
+                            <input type="text" name="addMark" id="MaddMark" class="form-control"
+                                placeholder="Addition mark for each correct answer">
                         </div>
 
                         <div class="form-group">
-                            <label> Email </label>
-                            <input type="text" name="email" id="email" class="form-control"
-                                placeholder="">
+                            <label> Deduction Mark</label>
+                            <input type="text" name="deductMark" id="MdeductMark" class="form-control"
+                                placeholder="Deduction Mark for each incorrect answer">
                         </div>
 
                         <div class="form-group">
-                            <label> Password </label>
-                            <input type="text" name="password" id="password" class="form-control"
+                            <label> No. of Questions </label>
+                            <input type="text" name="noOfQuestion" id="MnoOfQuestion" class="form-control"
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label> Gender </label>
-                            <input type="text" name="sex" id="sex" class="form-control"
+                            <label> Scheduled time</label>
+                            <input type="text" name="scheduledTime" id="MscheduledTime" class="form-control"
+                                placeholder="dd/mm/yyyy hh:mm">
+                        </div>
+                        <div class="form-group">
+                            <label> Duration(Minutes) </label>
+                            <input type="text" name="examDuration" id="MexamDuration" class="form-control"
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label> Birthday </label>
-                            <input type="text" name="BOD" id="BOD" class="form-control"
-                                placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label> Profile Image </label>
-                            <input type="text" name="profileImg" id="profileImg" class="form-control"
-                                placeholder="">
+                            <label> Exam ID </label>
+                            <input type="text" name="examID" id="MexamID" class="form-control"
+                                placeholder="" readonly>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updateStudata" class="btn btn-primary">Update Data</button>
+                        <button type="submit" name="updateExamdata" class="btn btn-primary">Update Data</button>
                     </div>
                 </form>
 
@@ -157,7 +158,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Delete Student Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Delete Exam Data </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -173,7 +174,37 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                        <button type="submit" name="deleteStudata" class="btn btn-primary"> Yes !! Delete it. </button>
+                        <button type="submit" name="deleteExamdata" class="btn btn-primary"> Yes !! Delete it. </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+        <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="viewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> View Exam Data </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="retrieveData.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="view_id" id="view_id">
+
+                        <h4> Do you want to View the Exam Question ??</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
+                        <button type="submit" name="viewExamdata" class="btn btn-primary"> Yes </button>
                     </div>
                 </form>
 
@@ -184,11 +215,11 @@
     <div class="container-fluid">
         <div class="jumbotron-fluid">
             <div class="card">
-                <h2> Student Database </h2>
+                <h2> Exam Dashboard </h2>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#examaddmodal">
                         ADD DATA
                     </button>
                 </div>
@@ -203,21 +234,22 @@
                 if (!$connect) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
-
-                $query = "SELECT * FROM stu_info";
+                $query = "SELECT * FROM exam";
                 $result = $connect->query($query);
                 ?>
-                    <table id="datatableid" class="table table-striped table-bordered">
+
+                    <table id="Examdata" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Login ID</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">User Password</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Birthday</th>
-                                <th scope="col">Profile Image</th>
-                                <th scope="col"> Action </th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Mark Addition</th>
+                                <th scope="col">Mark Deduction</th>
+                                <th scope="col">No. of Questions</th>
+                                <th scope="col">Scheduled time</th>
+                                <th scope="col">Duration(Minutes)</th>
+                                <th scope="col">Creation time</th>
+                                <th scope="col">Exam ID</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <?php
@@ -225,25 +257,20 @@
                 {
                     foreach($result as $row)
                     {
-            ?>
+                        ?>
                         <tbody>
                             <tr>
-                                <td><?php echo $row['userid']; ?></td>
-                                <td><?php echo $row['username']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?php echo $row['user_pw']; ?></td>
-                                <td><?php echo $row['sex']; ?></td>
-                                <td><?php echo $row['BOD']; ?></td>
-                                <td><?php 
-                                    if(!empty($row['profileImg'])){
-                                        echo $row['profileImg'] . "<br>";
-                                        echo "<img id='posts-img' src='/Exam/profileimage/".$row['profileImg']."' style='width: 100px;height:100px;'>";
-                                    }else {
-                                        echo "<img id='posts-img' src='/Exam/profileimage/your-picture.png' style='width: 100px;height:100px;'>";
-                                    }
-                                ?></td>
-                                <td><button type="button" class="btn btn-success editbtn"> EDIT </button>
-                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button></td>
+                                <td><?php echo $row['title']; ?></td>
+                                <td><?php echo $row['correct_mark']; ?></td>
+                                <td><?php echo $row['incorrect_mark']; ?></td>
+                                <td><?php echo $row['no_question']; ?></td>
+                                <td><?php echo $row['scheduled_time']; ?> </td>
+                                <td><?php echo $row['duration']; ?></td>
+                                <td><?php echo $row['creation_time']; ?></td>
+                                <td><?php echo $row['eid']; ?></td>
+                                <td><button type="button" class="btn btn-info viewbtn"> View </button>
+                                <button type="button" class="btn btn-success editbtn"> Modify </button>
+                                <button type="button" class="btn btn-danger deletebtn"> DELETE </button></td>
                             </tr>
                         </tbody>
                         <?php           
@@ -257,35 +284,13 @@
                     </table>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-    <!-- <script>
-        $(document).ready(function () {
-
-            $('.viewbtn').on('click', function () {
-                $('#viewmodal').modal('show');
-                $.ajax({ //create an ajax request to display.php
-                    type: "GET",
-                    url: "display.php",
-                    dataType: "html", //expect html to be returned                
-                    success: function (response) {
-                        $("#responsecontainer").html(response);
-                        //alert(response);
-                    }
-                });
-            });
-
-        });
-    </script> -->
-
 
     <script>
         $(document).ready(function () {
 
-            $('#datatableid').DataTable({
+            $('#Examdata').DataTable({
                 "pagingType": "full_numbers",
                 "lengthMenu": [
                     [10, 25, 50, -1],
@@ -317,7 +322,7 @@
 
                 console.log(data);
 
-                $('#delete_id').val(data[0]);
+                $('#delete_id').val(data[7]);
 
             });
         });
@@ -336,15 +341,36 @@
                     return $(this).text();
                 }).get();
 
-                console.log($.trim(data));
+                console.log(data);
 
-                $('#loginID').val(data[0]);
-                $('#username').val(data[1]);
-                $('#email').val(data[2]);
-                $('#password').val(data[3]);
-                $('#sex').val(data[4]);
-                $('#BOD').val(data[5]);
-                $('#profileImg').val(data[6]);
+                $('#MexamTitle').val(data[0]);
+                $('#MaddMark').val(data[1]);
+                $('#MdeductMark').val(data[2]);
+                $('#MnoOfQuestion').val(data[3]);
+                $('#MscheduledTime').val(data[4]);
+                $('#MexamDuration').val(data[5]);
+                $('#MexamID').val(data[7]);
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.viewbtn').on('click', function () {
+
+                $('#viewmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#view_id').val(data[7]);
+
             });
         });
     </script>

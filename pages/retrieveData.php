@@ -102,7 +102,7 @@
             header('Location: admin.php?page=staffDatabase');
         }
     }
-
+    //UpdateStaffdata
     if(isset($_POST['updateStaffdata']))
     {   
         $loginID = trim($_POST['loginID']);
@@ -131,7 +131,7 @@
             header("Location: admin.php?page=staffDatabase");
         }
     }
-
+    //deleteStaffdata
     if(isset($_POST['deleteStaffdata']))
     {
     $id = $_POST['delete_id'];
@@ -148,5 +148,86 @@
     {
         echo '<script> alert("Data Not Deleted"); </script>';
     }
+    }
+
+    //Insert Exam data
+    if(isset($_POST['insertExamdata']))
+    {
+    $examid = uniqid();
+    $title = $_POST['examTitle'];
+    $addMark = $_POST['addMark'];
+    $deductMark = $_POST['deductMark'];
+    $noOfQuestion = $_POST['noOfQuestion'];
+    $scheduledTime = $_POST['scheduledTime'];
+    $examDuration = $_POST['examDuration'];
+    $creationTime = date("d/m/Y H:i:s", time());
+    $query = "INSERT INTO exam (eid, title, correct_mark, incorrect_mark, no_question, scheduled_time, duration, creation_time) 
+        VALUES ('$examid','$title','$addMark','$deductMark','$noOfQuestion','$scheduledTime','$examDuration','$creationTime')";
+    if($connect->query($query))
+    {
+        echo '<script> alert("Data Inserted"); </script>';
+        header("location: staff.php?page=addExam");
+    }
+    else
+    {
+        echo '<script> alert("Data Not Inserted"); </script>';
+        echo "Error: " . $query . "<br>" . $connect->error;
+    }
+    }
+    //Update Exam data
+    if(isset($_POST['updateExamdata']))
+    {   
+        $examID = $_POST['examID'];
+        $title = $_POST['examTitle'];
+        $addMark = $_POST['addMark'];
+        $deductMark = $_POST['deductMark'];
+        $noOfQuestion = $_POST['noOfQuestion'];
+        $scheduledTime = $_POST['scheduledTime'];
+        $examDuration = $_POST['examDuration'];
+
+        $query = "UPDATE exam SET
+            title ='".$title."', 
+            correct_mark = '".$addMark."', 
+            incorrect_mark = '".$deductMark."', 
+            no_question = '".$noOfQuestion."', 
+            scheduled_time = '".$scheduledTime."',
+            duration = '".$examDuration."'
+            WHERE eid = '".$examID."'";
+
+        if($connect->query($query) == TRUE)
+        {
+            echo '<script> alert("Data Updated"); </script>';
+            header("Location: staff.php?page=addExam");
+        }
+        else
+        {
+            echo '<script> alert("Data Not Updated"); </script>';
+            echo "Error: " . $query . "<br>" . $connect->error;
+        }
+    }
+    //Delete Exam data
+    if(isset($_POST['deleteExamdata']))
+    {
+    $id = $_POST['delete_id'];
+    $examID = trim($id);
+    $query = "DELETE FROM exam WHERE eid= '".$examID."'";
+
+    if($connect->query($query))
+    {
+        echo '<script> alert("Data Deleted"); </script>';
+        header("location: staff.php?page=addExam");
+    }
+    else
+    {
+        echo '<script> alert("Data Not Deleted"); </script>';
+    }
+    }
+    //View Question data
+    if(isset($_POST['viewExamdata']))
+    {
+    session_start();
+    $ExamID = $_POST['view_id'];
+    $_SESSION['view_id'] = $ExamID;
+    header("location: staff.php?page=editQuestion");
     }
 ?>
