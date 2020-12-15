@@ -25,12 +25,54 @@
         crossorigin="anonymous"></script>
 </head>
 <?php 
-    $examID = $_SESSION['view_id'];
-    $query = "SELECT title, no_question FROM exam_info WHERE eid = '".$examID."'";
-    $rows = $connect->query($query)->fetch_assoc();
-    $title = $rows['title'];
-    $noOfQuestion = $rows['no_question'];
-    echo $examID;
+    if($_SESSION['user_role'] == "student"){
+        $examID = $_SESSION['exam_id'];
+        $loginID = $_SESSION['loginId'];
+        $questionArray = array();
+
+        $query = "SELECT optAns FROM exam_result WHERE userid = '".$loginID."' AND eid = '".$examID."'";
+        $query2 = "SELECT * FROM exam_question WHERE eid = '".$examID."'";
+        $query3 = "SELECT title, no_question FROM exam_info WHERE eid = '".$examID."'";
+        
+        
+        $result2 = $connect->query($query2); 
+
+        $row1 = $connect->query($query)->fetch_assoc();
+        while($row2 = $result2->fetch_assoc()){
+            $questionArray[] = $row2;
+        };
+        $row3 = $connect->query($query3)->fetch_assoc();
+
+        $splitAns = $row1['optAns'];
+        $chosenAns = explode(",",$splitAns);
+        $title = $row3['title'];
+        $noOfQuestion = $row3['no_question'];
+        echo $examID;
+        echo $loginID;
+    } elseif($_SESSION['user_role'] == "staff"){
+        $examID = $_SESSION['exam_id'];
+        $loginID = $_SESSION['userid'];
+        $questionArray = array();
+
+        $query = "SELECT optAns FROM exam_result WHERE userid = '".$loginID."' AND eid = '".$examID."'";
+        $query2 = "SELECT * FROM exam_question WHERE eid = '".$examID."'";
+        $query3 = "SELECT title, no_question FROM exam_info WHERE eid = '".$examID."'";
+        
+        
+        $result2 = $connect->query($query2); 
+
+        $row1 = $connect->query($query)->fetch_assoc();
+        while($row2 = $result2->fetch_assoc()){
+            $questionArray[] = $row2;
+        };
+        $row3 = $connect->query($query3)->fetch_assoc();
+
+        $splitAns = $row1['optAns'];
+        $chosenAns = explode(",",$splitAns);
+        $title = $row3['title'];
+        $noOfQuestion = $row3['no_question'];
+        echo $examID;
+    }
 ?>
 <body>
     <div class="card">
@@ -46,38 +88,27 @@
                                 echo "
                                 <b>Question $i</b><br>
                                 <div class='form-group'>
-                                    <input type='hidden' name='questionID' value='$i'>
-                                    <label class='' for='qns".$i."'></label>  
-                                    <textarea rows='3' cols='5' name='qns".$i."' class='form-control' placeholder='Write Question Here...'></textarea>  
+                                   '".$questionArray[$i-1]['question']."'
+                                </div>
+                                <div class='form-group bg-dark text-white'>
+                                   The chosen answer: ".$chosenAns[$i-1]."
+                                </div>
+                                <div class='form-group bg-success text-white'>
+                                   The correct answer: ".$questionArray[$i-1]['optAns']."
                                 </div>
                                 ";
                                 for($j = 1; $j <= 4; $j++){
                                     $optionArray = ['', 'A', 'B', 'C', 'D'];
                                     echo "
                                     <div class='form-group'>
-                                        <label class='col-md-12 control-label' for='".$i.$j."'></label>  
-                                        <div class='col-md-12'>
-                                        <input type='text' name='".$i.$j."' id='".$i.$j."' placeholder='Enter option ".$optionArray[$j]."' class='form-control input-md'>
-                                        </div>
+                                        ".$optionArray[$j]." : ".$questionArray[$i-1]['opt'.$i]."
                                     </div>
                                     ";
                                 }
-                                echo "
-                                    <div class='form-group'>
-                                        <select id='ans".$i."' name='ans".$i."' placeholder='Choose correct answer' class='form-control input-md'>
-                                            <option value='' disabled selected>Select answer for Question ".$i."</option>
-                                            <option value='A'>option A</option>
-                                            <option value='B'>option B</option>
-                                            <option value='C'>option C</option>
-                                            <option value='D'>option D</option> 
-                                        </select>
-                                    </div>
-                                ";
                             }
                         ?>
                         <div class="form-group">
-                            <button type="submit" name="updateQuestiondata" class="btn btn-lg btn-info">Update Question</button>
-                            <a href="staff.php" class="btn btn-lg btn-success">Back to Exam dashboard</a>
+                            <a href="student.php?page=examResult" class="btn btn-lg btn-success">Back to Exam Result dashboard</a>
                         </div>
                     </form>
                 </div>

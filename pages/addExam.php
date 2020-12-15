@@ -234,7 +234,7 @@
                 if (!$connect) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
-                $query = "SELECT * FROM exam";
+                $query = "SELECT * FROM exam_info";
                 $result = $connect->query($query);
                 ?>
 

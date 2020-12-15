@@ -33,6 +33,7 @@
         <div class="sidebar-heading">Menu</div>
         <div class="list-group list-group-flush">
             <a href="staff.php?page=addExam" name="page" class="list-group-item list-group-item-action bg-light">Exam Dashboard</a>
+            <a href="staff.php?page=examResult" name="page" class="list-group-item list-group-item-action bg-light">View Student Result</a>
             <a href="staff.php?page=staffProfile" name="page" class="list-group-item list-group-item-action bg-light">Profile</a>
             <a href="logout.php" name="page" class="list-group-item list-group-item-action bg-light">Logut</a>
         </div>
