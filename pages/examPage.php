@@ -97,7 +97,7 @@
                                     <div class='form-group'>
                                             <h2>Submission Completed!</h2>
                                             <a id='getValue' href='student.php?page=takeExam' class='btn btn-lg btn-success'>Back to Exam dashboard</a>
-                                            <a href='student.php?page=takeExam' class='btn btn-lg btn-success'>View Exam Result</a>
+                                            <a href='student.php?page=examResult' class='btn btn-lg btn-success'>View Exam Result</a>
                                     </div>
                                 ";
                             }

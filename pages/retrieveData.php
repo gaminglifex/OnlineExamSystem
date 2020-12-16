@@ -289,7 +289,8 @@
             $_SESSION['exam_id'] = $ExamID;
             $_SESSION['optAnsArray'] = array();
             $loginID = $_SESSION['loginId'];
-            $query2 = "INSERT INTO stu_exam (userid, eid) VALUES ('$loginID', '$ExamID')";
+            $resultID = $loginID . "_" . $ExamID;
+            $query2 = "INSERT INTO stu_exam (userid, eid, result_id) VALUES ('$loginID', '$ExamID', '$resultID')";
             if($connect->query($query2)){
                 echo "Update Success";
             } else{
@@ -306,12 +307,13 @@
         $start_time = strtotime(date("Y-m-d H:i:s", time()));
         $_SESSION['duration'] = $_SESSION['end_time'] - $start_time;
         $ExamID = $_POST['examID'];
+        $loginID = $_SESSION['loginId'];
         $q = $_POST['q'];
         $chosen = $_POST['optradio'];
         array_push($_SESSION['optAnsArray'],$chosen);
         $optAnsArray = $_SESSION['optAnsArray'];
         $optAns = implode(",",$optAnsArray);
-        $query = "UPDATE stu_exam SET optAns = '".$optAns."'";
+        $query = "UPDATE stu_exam SET optAns = '".$optAns."' WHERE userid = '".$loginID."' && eid = '".$ExamID."'";
         if($connect->query($query)){
             echo "Update Success";
         } else{
@@ -342,7 +344,7 @@
         $query = "UPDATE stu_exam SET 
         optAns = '".$optAns."',
         submission_time = '".$time."'
-        ";
+        WHERE eid = '".$ExamID."' && userid = '".$loginID."'";
 
         //Result Calculation
         $score = 0;
@@ -378,6 +380,14 @@
         //Completed Submisssion
         $q = $noOfQuestion+1;
         header("location: student.php?page=examPage&q=$q");
+    }
+    //Slect Exam Details
+    if(isset($_POST['submitExamTitle']))
+    {
+        session_start();
+        $examID = $_POST['ExamID'];
+        $_SESSION['viewExamID'] = $examID;
+        header("location: staff.php?page=examResult");
     }
     //View Exam Details
     if(isset($_POST['stuViewExamDetails']))

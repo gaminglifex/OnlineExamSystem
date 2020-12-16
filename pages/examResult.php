@@ -34,7 +34,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Enroll to Exam </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> View Exam Details </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -58,32 +58,75 @@
             </div>
         </div>
     </div>
-
+    <?php 
+        //Database Connection
+        $connect = mysqli_connect($server, $user, $pw, $db);
+        if (!$connect) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        $examInfoArray = array();
+        $query = "SELECT eid, title FROM exam_info";
+        $result = $connect->query($query);
+        if($result->num_rows > 0){
+            while($row1 = $result->fetch_assoc()){
+                $examInfoArray[] = $row1;
+            }
+        } else{
+            echo "0 results";
+        }
+        if(empty($_SESSION['viewExamID']))
+        {
+            $_SESSION['viewExamID'] = $examInfoArray[0]['eid'];
+        }
+        $numOfRows = $result->num_rows;
+    ?>
     <div class="container-fluid">
         <div class="jumbotron-fluid">
             <div class="card">
-                <h2> Exam Dashboard </h2>
+                <h2> Exam Result </h2>
+                <form action="retrieveData.php" method="POST">
+                            <?php
+                                if($_SESSION['user_role'] == "staff"){
+                                    echo"
+                                        <div class='form-group'>
+                                            <label class='font-weight-bold' for='Exam Title'>Select Exam to View</label>
+                                            <select class='form-control' style='width:30%' name='ExamID'>
+                                    ";
+                                            for($i = 0; $i < $numOfRows; $i++){
+                                                echo"
+                                                    <option value=".$examInfoArray[$i]['eid'].">
+                                                    ".$examInfoArray[$i]['title']."
+                                                    </option>
+                                                ";
+                                            }
+                                    echo"
+                                            </select>
+                                        </div>
+                                        <div class='form-group'>
+                                            <button type='submit' name='submitExamTitle' class='btn btn-info'> View this Exam </button>
+                                        </div>
+                                    ";
+
+                                }       
+                            ?>
+                </form>
             </div>
 
             <div class="card">
                 <div class="card-body">
 
                 <?php
-                //Database Connection
-                $connect = mysqli_connect($server, $user, $pw, $db);
-                if (!$connect) {
-                    die("Connection failed: " . mysqli_connect_error());
-                }
                 if($_SESSION['user_role'] == "student"){
                     //For ***Student***
                     //Data from Exam result
-                    $query = "SELECT * FROM exam_result WHERE userid = '".$_SESSION['loginId']."'";
+                    $query = "SELECT * FROM exam_result INNER JOIN stu_exam
+                            on exam_result.result_id = stu_exam.result_id
+                        WHERE exam_result.userid = '".$_SESSION['loginId']."'";
                     $result = $connect->query($query);
                     //Data from Stu result Record
-                    $query2 = "SELECT submission_time FROM stu_exam WHERE userid = '".$_SESSION['loginId']."'";
-                    $row2 = $connect->query($query2)->fetch_assoc();
-                    $time = $row2['submission_time'];
-                    $result = $connect->query($query);
+                    // $query2 = "SELECT submission_time FROM stu_exam WHERE userid = '".$_SESSION['loginId']."'";
+                    // $row2 = $connect->query($query2)->fetch_assoc();
+                    // $time = $row2['submission_time'];
                     ?>
 
                         <table id="Examdata" class="table table-striped table-bordered">
@@ -108,7 +151,7 @@
                                     <td><?php echo $row['userid']; ?></td>
                                     <td><?php echo $row['title']; ?></td>
                                     <td><?php echo $row['score']; ?> </td>
-                                    <td><?php echo $time; ?></td>
+                                    <td><?php echo $row['submission_time']; ?></td>
                                     <td><?php echo $row['eid']; ?></td>
                                     <td><button type="button" class="btn btn-info viewbtn"> View Details </button></td>
                                 </tr>
@@ -123,12 +166,17 @@
                 } elseif($_SESSION['user_role'] == "staff"){
                     //For ***Staff***
                     //Data from Exam result
-                    $query = "SELECT * FROM exam_result";
+                    $query = "SELECT * FROM ((exam_result 
+                        INNER JOIN stu_exam 
+                            on exam_result.result_id = stu_exam.result_id)
+                        INNER JOIN stu_info
+                            on stu_exam.userid = stu_info.userid)
+                        WHERE exam_result.eid = '".$_SESSION['viewExamID']."'";
                     $result = $connect->query($query);
                     //Data from Stu result Record
-                    $query2 = "SELECT submission_time FROM stu_exam";
-                    $row2 = $connect->query($query2)->fetch_assoc();
-                    $time = $row2['submission_time'];
+                    // $query2 = "SELECT submission_time FROM stu_exam";
+                    // $row2 = $connect->query($query2)->fetch_assoc();
+                    // $time = $row2['submission_time'];
                     //Data from stu_info
                     $query3 = "SELECT * FROM stu_info";
                     $row3 = $connect->query($query3);
@@ -138,6 +186,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Student ID</th>
+                                    <th scope="col">Student Name</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Score</th>
                                     <th scope="col">Submission Time</th>
@@ -154,11 +203,12 @@
                             <tbody>
                                 <tr>
                                     <td><?php echo $row['userid']; ?></td>
+                                    <td><?php echo $row['username']; ?></td>
                                     <td><?php echo $row['title']; ?></td>
                                     <td><?php echo $row['score']; ?> </td>
-                                    <td><?php echo $time; ?></td>
+                                    <td><?php echo $row['submission_time']; ?></td>
                                     <td><?php echo $row['eid']; ?></td>
-                                    <td><button type="button" class="btn btn-info viewbtn"> View Details </button></td>
+                                    <td><button type="button" class="btn btn-info staffViewbtn"> View Details </button></td>
                                 </tr>
                             </tbody>
                             <?php           
@@ -218,6 +268,26 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
 
+            $('.staffViewbtn').on('click', function () {
+
+                $('#viewmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#userid').val(data[0]);
+                $('#exam_id').val(data[5]);
+
+            });
+        });
+    </script>
 </body>
 </html>
