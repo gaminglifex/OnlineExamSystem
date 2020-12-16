@@ -38,8 +38,6 @@
     };
     $row = $connect->query($query2)->fetch_assoc();
     $title = $row['title'];
-    $duration = $row['duration'];
-    $duration = $duration*5;
     $noOfQuestion = $row['no_question'];
     echo $questionArray[0]['qid'];
     echo $examID;
@@ -51,8 +49,8 @@
             <div class="d-flex justify-content-center">
                 <div class="col-md-6">
                     <form action="retrieveData.php" method="POST">
-                        <div id="timer" data-timer="<?php echo $duration;?>" style="width:50%;height:100px;"></div>
-                        <button type='hidden' name='submitExam' id='submitExam'></button>
+                        <div id="timer" data-timer="<?php echo $_SESSION['duration'];?>" style="width:50%;height:100px;"></div>
+                        <button type='hidden' name='JSsubmitExam' id='submitExam' class="btn bg-transparent"></button>
                         <input type="hidden" name="examID" value="<?php echo $examID; ?>">
                         <input type="hidden" name="noOfQuestion" value="<?php echo $noOfQuestion; ?>">
                         <?php
@@ -61,6 +59,7 @@
                             if($q <= $noOfQuestion){
                                 echo "
                                 <div class='form-group'>
+                                    <input type='hidden' id='getValue'></input>
                                     <input type='hidden' name='q' value='$q'>
                                     <b>Question $q</b><br>
                                     ".$questionArray[$q-1]['question']."
@@ -97,7 +96,7 @@
                                 echo "
                                     <div class='form-group'>
                                             <h2>Submission Completed!</h2>
-                                            <a href='student.php?page=takeExam' class='btn btn-lg btn-success'>Back to Exam dashboard</a>
+                                            <a id='getValue' href='student.php?page=takeExam' class='btn btn-lg btn-success'>Back to Exam dashboard</a>
                                             <a href='student.php?page=takeExam' class='btn btn-lg btn-success'>View Exam Result</a>
                                     </div>
                                 ";
@@ -109,26 +108,34 @@
         </div>
     </div>
 
-    <script>
-
-    $("#timer").TimeCircles({
-        time:{
-            Days:{
-                show: false
-            },
-        }
-    });
-
-    setInterval(function(){
-        var remaining_second = $("#timer").TimeCircles().getTime();
-        if(remaining_second < 1)
-        {
-            document.getElementById("submitExam").click();
-            $("#timer").TimeCircles().stop();
-            alert('Exam time is over');
-        }
-    }, 1000);
-
-    </script>
 </body>
+<script>
+
+$("#timer").TimeCircles({
+    count_past_zero: false,
+    time:{
+        Days:{
+            show: false
+        },
+    }
+})
+
+var countdown = setInterval(function(){
+    var remaining_second = $("#timer").TimeCircles().getTime();
+    var getValue = document.getElementById('getValue').innerHTML;
+    if(getValue != "Back to Exam dashboard")
+    {
+        if(remaining_second <= 0)
+        {
+            clearInterval(countdown);
+            alert('Exam time is over');
+            document.getElementById("submitExam").click();
+        }
+    } else{
+        $("#timer").TimeCircles().stop();
+    }
+}, 1000);
+
+
+</script>
 </html>

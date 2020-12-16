@@ -262,6 +262,7 @@
                 } //Insert Data First
             }
         }
+        header("location: staff.php?page=addExam");
     }
 
     //Enroll to Exam
@@ -269,10 +270,16 @@
     {
         session_start();
         $ExamID = $_POST['exam_id'];
-        $query = "SELECT scheduled_time FROM exam_info WHERE eid = '".$ExamID."'";
+        $query = "SELECT scheduled_time, duration FROM exam_info WHERE eid = '".$ExamID."'";
         $row = $connect->query($query)->fetch_assoc();
         $scheduledTime = $row['scheduled_time'];
-        $currentTime = date("d/m/Y H:i:s");
+        $duration = $row['duration'];
+        $end_duration = time()+($duration*60);
+        $currentTime = date("d/m/Y H:i:s", time());
+        $start_time = strtotime(date("Y-m-d H:i:s", time()));
+        $end_time = strtotime(date("Y-m-d H:i:s", $end_duration));
+        $_SESSION['end_time'] = $end_time;
+        $_SESSION['duration'] = $end_time - $start_time;
         if($currentTime < $scheduledTime){
             echo "<script> 
             alert('You are not allowed to start the exm before the Scheduled Time!');
@@ -296,6 +303,8 @@
     if(isset($_POST['nextQuestion']))
     {
         session_start();
+        $start_time = strtotime(date("Y-m-d H:i:s", time()));
+        $_SESSION['duration'] = $_SESSION['end_time'] - $start_time;
         $ExamID = $_POST['examID'];
         $q = $_POST['q'];
         $chosen = $_POST['optradio'];
@@ -313,10 +322,12 @@
         header("location: student.php?page=examPage&q=$q");
     }
     //Submit Question
-    if(isset($_POST['submitExam']))
+    if(isset($_POST['submitExam']) || isset($_POST['JSsubmitExam']))
     {
         //Submit
         session_start();
+        $start_time = strtotime(date("Y-m-d H:i:s", time()));
+        $_SESSION['duration'] = $_SESSION['end_time'] - $start_time;
         $ExamID = $_POST['examID'];
         $loginID = $_SESSION['loginId'];
         $resultID = $loginID . "_" . $ExamID;
